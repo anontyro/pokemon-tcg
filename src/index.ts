@@ -24,7 +24,8 @@ const setupDatabase = () => {
   db.prepare(
     `CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      userName TEXT,
+      userName TEXT NOT NULL UNIQUE DEFAULT 'Anonymous',
+      userId TEXT NOT NULL UNIQUE DEFAULT '00000000-0000-0000-0000-000000000000',
       firstName TEXT,
       lastName TEXT,
       email TEXT
@@ -44,7 +45,9 @@ const setupDatabase = () => {
   );
 
   ipcMain.handle("get-users", () => {
-    const stmt = db.prepare("SELECT * FROM users");
+    const stmt = db.prepare(
+      "SELECT userName, userId, firstName, lastName, email FROM users"
+    );
     return stmt.all();
   });
 };
