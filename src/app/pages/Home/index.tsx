@@ -16,6 +16,7 @@ const HomePage: React.FC = () => {
     <Paper>
       <Box>
         <Typography>Test Home Page</Typography>
+        <img src="public/images/pokemonTcg/sets/surgingSparks.png" />
       </Box>
     </Paper>
   );
